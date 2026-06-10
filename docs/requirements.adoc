@@ -19,7 +19,7 @@
 * Only authenticated users can create, view, edit, and delete tasks.
 * Each task must have a title, description, start datetime and end datetime.
 * Tasks can be assigned to specific users.
-* Each task can have one of the following statuses: To Do, In Progress, Blocked, Done.
+* Each task can have one of the following statuses: Pending, In Progress, On Hold, Completed.
 * All tasks should be visible to all users in the system.
 
 == Task Scheduler

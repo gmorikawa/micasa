@@ -1,0 +1,24 @@
+= Task
+
+== Overview
+
+The Task entity represents a specific task or assignment within the system at a given date and time.
+
+The same type of task can appear multiples times in the system, for example, a "Daily Standup" task that occurs every weekday. Each instance of the task is treated as a separate entity, allowing for tracking and management of individual occurrences.
+
+== Attributes
+
+* `id` (string): A unique identifier for the task.
+* `title` (string): The title or name of the task.
+* `description` (string): A detailed description of the task.
+* `assignee_id` (string): The unique identifier of the user to whom the task is assigned.
+* `status` (string): The current status of the task, which can be `pending`, `in_progress`, `on_hold`, or `completed`.
+* `start_at` (datetime): The date and time when the task is scheduled to start.
+* `end_at` (datetime): The date and time when the task is scheduled to end.
+* `created_at` (datetime): The timestamp when the task was created.
+* `updated_at` (datetime): The timestamp when the task was last updated.
+
+== Relationships
+
+* A Task is assigned to one User (the assignee).
+* A User can have multiple Tasks assigned to them.
