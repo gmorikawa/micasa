@@ -1,0 +1,28 @@
+= Requirements
+
+== Authentication and Authorization
+* Only authenticated users can access the system.
+* Users authenticate using their email and password.
+* There are two roles: Admin and Member.
+* Admins have full access to all features and can manage users.
+
+== User Management
+* Only admin can register new users.
+* Admins can view, edit, and delete any user profile.
+* Members can view and manage only their own profiles.
+* Users can update their own profiles, including changing their password and email.
+* Users with same email cannot be registered.
+* To register a new user, the admin must provide a unique email and a password.
+* Whenever a user updates their profile, the system will require them to enter their current password for verification.
+
+== Tasks Management
+* Only authenticated users can create, view, edit, and delete tasks.
+* Each task must have a title, description, start datetime and end datetime.
+* Tasks can be assigned to specific users.
+* Each task can have one of the following statuses: To Do, In Progress, Blocked, Done.
+* All tasks should be visible to all users in the system.
+
+== Task Scheduler
+* Some tasks can be created automatically based on predefined rules (e.g., recurring tasks).
+* The rules for recurring tasks include daily, weekly, and monthly frequencies.
+* The system should automatically generate tasks based on the defined rules and assign them to the appropriate users.
