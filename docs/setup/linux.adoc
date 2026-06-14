@@ -1,0 +1,26 @@
+= Linux Setup
+
+First thing you need to do is to install PHP version 8.4 or higher. You can do this by running the following command in your terminal:
+```bash
+sudo apt-get update
+
+# install PHP 8.4
+sudo apt-get install php8.4
+
+# install PHP extensions required by Laravel
+sudo apt install php8.4-bcmath php8.4-curl php8.4-mbstring php8.4-xml php8.4-zip php8.4-tokenizer
+```
+
+Next, you need to install Composer, which is a dependency manager for PHP. You can do this by running the following command in your terminal:
+```bash
+curl -sS https://getcomposer.org/installer | php
+sudo mv composer.phar /usr/local/bin/composer
+```
+
+After installing Composer, use it to install the dependencies for your Laravel project by running the following command in your terminal:
+```bash
+composer install
+```
+
+Finally, you need to set up your environment variables. You can do this by creating a `.env` file in the root of your project and adding the following lines:
+
