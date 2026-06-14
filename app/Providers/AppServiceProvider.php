@@ -17,6 +17,11 @@ class AppServiceProvider extends ServiceProvider
         );
 
         $this->app->singleton(
+            \App\Core\Cache::class,
+            \App\Core\Cache\Implementation\RedisCache::class
+        );
+
+        $this->app->singleton(
             \App\Core\User\UserRepository::class,
             \App\Core\User\Implementation\EloquentUserRepository::class
         );
