@@ -15,6 +15,11 @@ class AppServiceProvider extends ServiceProvider
             \App\Core\Auth\PasswordHasher::class,
             \App\Core\Auth\Implementation\BcryptPasswordHasher::class
         );
+
+        $this->app->singleton(
+            \App\Core\User\UserRepository::class,
+            \App\Core\User\Implementation\EloquentUserRepository::class
+        );
     }
 
     /**
