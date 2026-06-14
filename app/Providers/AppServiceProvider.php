@@ -11,7 +11,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->singleton(
+            \App\Core\Auth\PasswordHasher::class,
+            \App\Core\Auth\Implementation\BcryptPasswordHasher::class
+        );
     }
 
     /**
