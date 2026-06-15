@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Core\Auth;
+namespace App\Core\Auth\Actions;
 
+use App\Core\Auth\Token;
 use App\Core\Cache;
 
 class Logout

@@ -1,8 +1,11 @@
 <?php
 
-namespace App\Core\Auth;
+namespace App\Core\Auth\Actions;
 
+use App\Core\Auth\Credentials;
 use App\Core\Auth\Exceptions\InvalidCredentialsException;
+use App\Core\Auth\PasswordHasher;
+use App\Core\Auth\Token;
 use App\Core\Cache;
 use App\Core\User\LoggedUser;
 use App\Core\User\UserRepository;

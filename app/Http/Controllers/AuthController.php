@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Core\Auth\Actions\RegisterAdmin;
+use App\Core\Auth\Actions\Login;
+use App\Core\Auth\Actions\Logout;
 use App\Core\Auth\Credentials;
-use App\Core\Auth\Login;
-use App\Core\Auth\Logout;
 use App\Core\Auth\PlainPassword;
-use App\Core\Auth\RegisterAdmin;
 use App\Core\Auth\Token;
 use App\Core\User\Email;
 use Illuminate\Http\Request;

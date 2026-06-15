@@ -1,10 +1,13 @@
 <?php
 
-namespace App\Core\Auth;
+namespace App\Core\Auth\Actions;
 
 use App\Core\Auth\Exceptions\InvalidCredentialsException;
+use App\Core\Auth\PasswordHasher;
+use App\Core\Auth\PlainPassword;
 use App\Core\User\Admin;
 use App\Core\User\Email;
+use App\Core\User\User;
 use App\Core\User\UserID;
 use App\Core\User\UserRepository;
 
@@ -22,7 +25,7 @@ class RegisterAdmin
         $this->userRepository = $userRepository;
     }
 
-    public function execute(Email $email, PlainPassword $password): Admin
+    public function execute(Email $email, PlainPassword $password): User
     {
         $totalUsers = $this->userRepository->countAll();
 
