@@ -15,14 +15,29 @@
 * To register a new user, the admin must provide a unique email and a password.
 * Whenever a user updates their profile, the system will require them to enter their current password for verification.
 
-== Tasks Management
-* Only authenticated users can create, view, edit, and delete tasks.
-* Each task must have a title, description, start datetime and end datetime.
-* Tasks can be assigned to specific users.
-* Each task can have one of the following statuses: Pending, In Progress, On Hold, Completed.
-* All tasks should be visible to all users in the system.
+== House and Rooms
+* Only the admin can create, view, edit, and delete houses.
+* Each house must have a unique name.
+* Each house can have multiple members.
+* Members can be assigned to a house by the admin.
+* A house acts like a aggregate for chores, members and areas.
+* Only the admin can create, view, edit, and delete rooms.
+* Each room must have a unique name.
+* Rooms must be associated with a house.
 
-== Task Scheduler
-* Some tasks can be created automatically based on predefined rules (e.g., recurring tasks).
-* The rules for recurring tasks include daily, weekly, and monthly frequencies.
-* The system should automatically generate tasks based on the defined rules and assign them to the appropriate users.
+== Assets Management
+* A asset is a physical item that exists in a room.
+* Only the admin can create, view, edit, and delete assets.
+* Each asset must have a name, description, and be associated with a room.
+
+== Activities and Chores
+* A activity is a specific action that needs to be performed, such as Cleaning, Refill, etc.
+* Only the admin can create, view, edit, and delete activities.
+* Each activity must have a name and description.
+* A chore template is a configuration to generate chores automatically.
+* Users can create, view, edit, and delete chore templates.
+* Each chore template must have a name, description, and be associated with an activity.
+* Each chore template can have a frequency (daily, weekly, monthly) and a frequency value.
+    * The frequency value for `weekly` must be between 1 and 7, representing the day of the week (1 for Monday, 7 for Sunday).
+    * The frequency value for `monthly` must be between 1 and 31, representing the day of the month.
+* A chore is an instance of a chore template that is assigned to a user and has a due date.
