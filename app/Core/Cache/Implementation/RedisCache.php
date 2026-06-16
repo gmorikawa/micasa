@@ -2,7 +2,7 @@
 
 namespace App\Core\Cache\Implementation;
 
-use App\Core\Cache;
+use App\Core\Cache\Cache;
 use Illuminate\Support\Facades\Cache as CacheFacade;
 
 class RedisCache implements Cache
