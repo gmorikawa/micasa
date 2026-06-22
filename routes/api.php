@@ -18,6 +18,8 @@ Route::prefix('auth')->group(function () {
 });
 
 Route::prefix('users')->middleware('bearer.token')->group(function () {
+    Route::get('/', [UserController::class, 'getAll']);
+    Route::get('/{id}', [UserController::class, 'getById']);
     Route::post('/', [UserController::class, 'create']);
     Route::put('/{id}', [UserController::class, 'update']);
     Route::delete('/{id}', [UserController::class, 'delete']);

@@ -14,7 +14,15 @@ class EloquentUserRepository implements UserRepository
 {
     public function findAll(): array
     {
-        return UserModel::all()->toArray();
+        return array_map(
+            fn($model) => new User(
+                new UserID($model['id']),
+                new Email($model['email']),
+                new HashedPassword($model['password']),
+                UserRole::from($model['role'])
+            ),
+            UserModel::all()->toArray()
+        );
     }
 
     public function countAll(): int

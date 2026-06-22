@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Core\Cache;
+use App\Core\Cache\Cache;
 use App\Core\User\LoggedUser;
 use Closure;
 use Illuminate\Http\Request;
