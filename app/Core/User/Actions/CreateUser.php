@@ -8,20 +8,18 @@ use App\Core\User\Email;
 use App\Core\User\Exceptions\DuplicatedEmailException;
 use App\Core\User\User;
 use App\Core\User\UserID;
-use App\Core\User\UserRepository;
 use App\Core\User\UserRole;
+
+use App\Models\UserModel;
 
 class CreateUser
 {
     private readonly PasswordHasher $hasher;
-    private readonly UserRepository $repository;
 
     public function __construct(
         PasswordHasher $hasher,
-        UserRepository $repository
     ) {
         $this->hasher = $hasher;
-        $this->repository = $repository;
     }
 
     public function execute(
@@ -32,7 +30,7 @@ class CreateUser
     {
         $hashedPassword = $this->hasher->hash($plainPassword);
 
-        $userWithEmail = $this->repository->findByEmail($email);
+        $userWithEmail = UserModel::where('email', $email)->first();
 
         if ($userWithEmail) {
             throw new DuplicatedEmailException();
@@ -45,6 +43,12 @@ class CreateUser
             role: $role
         );
 
-        return $this->repository->save($entity);
+        $model = new UserModel();
+        $model->email = $entity->getEmail();
+        $model->password = $entity->getPassword();
+        $model->role = $entity->getRole()->value;
+        $model->save();
+
+        return $model->toEntity();
     }
 }

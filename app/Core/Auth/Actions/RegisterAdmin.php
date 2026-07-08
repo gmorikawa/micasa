@@ -5,29 +5,33 @@ namespace App\Core\Auth\Actions;
 use App\Core\Auth\Exceptions\InvalidCredentialsException;
 use App\Core\Auth\PasswordHasher;
 use App\Core\Auth\PlainPassword;
+use App\Core\User\Actions\SearchUser;
 use App\Core\User\Admin;
 use App\Core\User\Email;
 use App\Core\User\User;
 use App\Core\User\UserID;
-use App\Core\User\UserRepository;
+
+use App\Models\UserModel;
 
 class RegisterAdmin
 {
     private readonly PasswordHasher $passwordHasher;
-    private readonly UserRepository $userRepository;
 
     public function __construct(
         PasswordHasher $passwordHasher,
-        UserRepository $userRepository
     )
     {
         $this->passwordHasher = $passwordHasher;
-        $this->userRepository = $userRepository;
     }
 
+    /**
+     * Registers an admin user with the given email and password.
+     * 
+     * @throws InvalidCredentialsException When an admin user already exists.
+     */
     public function execute(Email $email, PlainPassword $password): User
     {
-        $totalUsers = $this->userRepository->countAll();
+        $totalUsers = app(SearchUser::class)->count();
 
         if ($totalUsers > 0) {
             throw new InvalidCredentialsException('Admin user already exists.');
@@ -39,6 +43,13 @@ class RegisterAdmin
             email: new Email($email),
             password: $hashedPassword,
         );
-        return $this->userRepository->save($admin);
+
+        $model = new UserModel();
+        $model->email = $admin->getEmail();
+        $model->password = $admin->getPassword();
+        $model->role = $admin->getRole()->value;
+        $model->save();
+
+        return $model->toEntity();
     }
 }

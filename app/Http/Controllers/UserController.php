@@ -6,7 +6,6 @@ use App\Core\Auth\PlainPassword;
 use App\Core\User\Actions\{
     CreateUser,
     DeleteUser,
-    ReadUser,
     SearchUser,
     UpdateUser,
 };
@@ -19,20 +18,18 @@ use App\Core\User\{
 use Exception;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
     public function getAll()
     {
         try {
-            $users = app(SearchUser::class)->execute();
-            Log::debug('Retrieved users', $users);
+            $users = app(SearchUser::class)->all();
             return response()
                 ->json(
                     [
                         'message' => 'Users retrieved successfully',
-                        'data' => array_map(fn($user) => $user->toArray(), $users)
+                        'data' => $users->map(fn ($user) => $user->toArray())
                     ],
                     200
                 );
@@ -51,7 +48,7 @@ class UserController extends Controller
     public function getById(string $id)
     {
         try {
-            $user = app(ReadUser::class)->execute(new UserID($id));
+            $user = app(SearchUser::class)->byId(new UserID($id));
             
             if (!$user) {
                 return response()

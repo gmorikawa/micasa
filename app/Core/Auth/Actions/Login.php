@@ -7,31 +7,29 @@ use App\Core\Auth\Exceptions\InvalidCredentialsException;
 use App\Core\Auth\PasswordHasher;
 use App\Core\Auth\Token;
 use App\Core\Cache\Cache;
+use App\Core\User\Actions\SearchUser;
 use App\Core\User\LoggedUser;
-use App\Core\User\UserRepository;
 use App\Core\User\UserSession;
+
 use Illuminate\Support\Str;
 
 class Login
 {
     private readonly Cache $cache;
     private readonly PasswordHasher $passwordHasher;
-    private readonly UserRepository $userRepository;
 
     public function __construct(
         Cache $cache,
         PasswordHasher $passwordHasher,
-        UserRepository $userRepository
     )
     {
         $this->cache = $cache;
         $this->passwordHasher = $passwordHasher;
-        $this->userRepository = $userRepository;
     }
 
     public function execute(Credentials $credentials): UserSession
     {
-        $user = $this->userRepository->findByEmail($credentials->getEmail());
+        $user = app(SearchUser::class)->byEmail($credentials->getEmail());
 
         if (!$user || !$this->passwordHasher->verify($credentials->getPassword(), $user->getPassword())) {
             throw new InvalidCredentialsException();
